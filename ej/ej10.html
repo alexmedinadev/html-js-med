@@ -1,0 +1,220 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumativa 3 | </title>
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95e1a31bea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script>
+      $(document).ready(function(){
+        $("#addButton").click(function(){
+          addRow("",0,0,0,0);
+        });
+
+        addRow("Angel Zapata", 5.0, 4.6, 4.1, 4.2);
+        addRow("Marcela Castillo", 5.8, 6.4, 3.4, 4.8);
+        addRow("Romina Donoso", 7.0, 5.9, 6.1, 6.3);
+        addRow("Alberto Lorca", 4.3, 5.6, 5.4, 2.1);
+        addRow("Mauricio Jerez", 6.3, 2.4, 5.9, 6.0);
+        
+        runObserver();
+      });
+
+      function setEstado(n1, n2, n3, n4, p){
+        var promedio = 0;
+        promedio = parseFloat((parseFloat(n1.value)+parseFloat(n2.value)+parseFloat(n3.value)+parseFloat(n4.value))/4).toFixed(2)
+        p.value = promedio;
+        return promedio;
+      }
+
+      function calculateRows(){
+        var n = $('#tableBody tr').length;
+        var promBajo = -1;
+        var promAlto = -1;
+        var prom = 0;
+        for (let index = 1; index < n+1; index++) {
+          prom = setEstado(document.getElementById("N1"+index),document.getElementById("N2"+index),document.getElementById("N3"+index),document.getElementById("N4"+index),document.getElementById("P"+index));
+          if (promAlto == -1 && promBajo == -1){
+            promBajo = prom;
+            promAlto = prom;
+          }
+          
+          if (promAlto < prom){
+            promAlto = prom;
+          }
+
+          if (promBajo > prom){
+            promBajo = prom;
+          }
+        }
+        document.getElementById("PA").value = promAlto;
+        document.getElementById("PB").value = promBajo;
+        document.getElementById("NA").value = n;
+        document.getElementById("NR").value = notaMasRepetida();
+      }
+
+      function notaMasRepetida(){
+        var notas = [];
+        var rows = $('#tableBody tr').length;
+        for (let index = 1; index < rows+1; index++) {
+          for (var i = 1; i<5; i++){
+            var n = document.getElementById("N"+i+index).value
+            var exist = false;
+            for (var nota of notas) {
+              if (nota[0] == n){
+                exist = true
+                nota[1] = parseInt(nota[1])+1;
+              }
+            }
+            if (!exist){
+              notas.push([n,1])
+            }
+          }
+        }
+        var cnt = 0;
+        var notaRepetida = -1;
+        for (var nota of notas) {
+          if (cnt<nota[1]){
+            cnt = nota[1];
+            notaRepetida = nota[0];
+          }
+        }
+        return notaRepetida;
+      }
+
+      function addRow(nombre,n1,n2,n3,n4){
+        var rowCount = $('#tableBody tr').length;
+        var n = rowCount + 1;
+        $('#tableBody tr:last').after('<tr><td><input type="text" class="form-control" id="E'+n+'" value="'+nombre+'"></td><td><input type="text" class="form-control" id="N1'+n+'" value="'+n1+'"></td><td><input type="text" class="form-control" id="N2'+n+'" value="'+n2+'"></td><td><input type="text" class="form-control" id="N3'+n+'" value="'+n3+'"></td><td><input type="text" class="form-control" id="N4'+n+'" value="'+n4+'"></td><td><input type="text" class="form-control" readonly id="P'+n+'" value="0"></td></tr>');
+        calculateRows();
+      }
+      
+  </script>
+</head>
+<body>
+    <div class="p-3">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Sumativa 3</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ejercicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <h6 class="dropdown-header">Parte 1</h6>
+                      <a class="dropdown-item" href="ej1.html">Ejercicio 1 - Deuda</a>
+                      <a class="dropdown-item" href="ej2.html">Ejercicio 2 - Total Compra</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 2</h6>
+                      <a class="dropdown-item" href="ej3.html">Ejercicio 3 - Sueldo</a>
+                      <a class="dropdown-item" href="ej4.html">Ejercicio 4 - Acciones</a>
+                      <a class="dropdown-item" href="ej5.html">Ejercicio 5 - Gastos/Ventas</a>
+                      <a class="dropdown-item" href="ej6.html">Ejercicio 6 - Ingresos/Comisión</a>
+                      <a class="dropdown-item" href="ej7.html">Ejercicio 7 - Sueldo/Hora</a>
+                      <a class="dropdown-item" href="ej8.html">Ejercicio 8 - Vuelos</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 3</h6>
+                      <a class="dropdown-item" href="ej9.html">Ejercicio 9 - Sueldo Empleado</a>
+                      <a class="dropdown-item active" href="ej10.html">Ejercicio 10 - Notas</a>
+                      <a class="dropdown-item" href="ej11.html">Ejercicio 11 - Banco</a>
+                      <a class="dropdown-item" href="ej12.html">Ejercicio 12 - Sueldo/Hijos</a>
+                      <a class="dropdown-item" href="ej13.html">Ejercicio 13 - Isapre/AFP</a>
+                  </div>
+                    </li>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <table class="table" id="tabla">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Nota 1</th>
+                    <th scope="col">Nota 2</th>
+                    <th scope="col">Nota 3</th>
+                    <th scope="col">Nota 4</th>
+                    <th scope="col">Promedio</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <tr>
+                    <td><input type="text" class="form-control" id="E1" value="Arturo Castro"></td>
+                    <td><input type="text" class="form-control" id="N11" value="6.5"></td>
+                    <td><input type="text" class="form-control" id="N21" value="5.5"></td>
+                    <td><input type="text" class="form-control" id="N31" value="5.1"></td>
+                    <td><input type="text" class="form-control" id="N41" value="5.9"></td>
+                    <td><input type="text" class="form-control" readonly id="P1" value="0"></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Agregar fila</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">El promedio mas alto es:</td>
+                    <td><input type="text" class="form-control" readonly id="PA" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">El promedio mas bajo es:</td>
+                    <td><input type="text" class="form-control" readonly id="PB" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">El numero de alumnos es:</td>
+                    <td><input type="text" class="form-control" readonly id="NA" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">La nota mas repedida es:</td>
+                    <td><input type="text" class="form-control" readonly id="NR" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+            </table>            
+          </div>
+        </div>
+    </div>
+</body>
+</html>

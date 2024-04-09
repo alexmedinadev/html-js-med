@@ -1,0 +1,338 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumativa 3 | </title>
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95e1a31bea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script>
+      $(document).ready(function(){
+        $("#addButton").click(function(){
+          addRow("","",0,"",0,"",0,"");
+          calculateRows();
+        });
+
+        addRow('05287190-8','Sucursal 2','675911','Habitat','12,84','Vida Tres','7','1996-12-15');
+        addRow('05366854-5','','529946','Habitat','12,84','Banmedica','6,9','1996-12-16');
+        addRow('05375108-3','Sucursal 1','767258','Bansander','12,7','Banmedica','6,9','1996-12-17');
+        addRow('05399194-9','Casa Matriz','400000','Habitat','12,84','Consalud','7,2','2000-05-19');
+        addRow('05430955-2','Sucursal 1','764986','Habitat','12,84','Vida Tres','7','2000-05-20');
+        addRow('05484222-3','Sucursal 1','338434','Bansander','12,7','Vida Tres','7','2000-05-21');
+        addRow('05507487-6','Sucursal 1','276485','Habitat','12,84','Banmedica','6,9','2000-05-22');
+        addRow('05517211-6','Sucursal 1','680876','Habitat','12,84','Banmedica','6,9','2000-05-23');
+        addRow('05560499-0','Casa Matriz','452146','Bansander','12,7','Vida Tres','7','2000-05-24');
+        addRow('05615732-1','Casa Matriz','702009','Bansander','12,7','Banmedica','6,9','2000-05-25');
+        addRow('05662071-8','','273349','Bansander','12,7','Vida Tres','7','2000-05-26');
+        addRow('05908774-5','Casa Matriz','484843','Habitat','12,84','Consalud','7,2','2000-05-27');
+        addRow('07086406-6','Casa Matriz','762219','Habitat','12,84','Consalud','7,2','1999-04-25');
+        addRow('07257217-4','Casa Matriz','323137','Habitat','12,84','Vida Tres','7','1999-04-26');
+        addRow('07423416-6','Sucursal 1','332192','Habitat','12,84','Banmedica','6,9','1999-04-27');
+        addRow('07554978-7','Sucursal 2','782160','Habitat','12,84','Vida Tres','7','1999-04-28');
+        addRow('07834058-2','Sucursal 1','660988','Bansander','12,7','Vida Tres','7','1998-04-11');
+        addRow('07957995-7','Sucursal 2','451715','Bansander','12,7','Banmedica','6,9','1998-04-12');
+        addRow('08048091-K','Casa Matriz','574185','Bansander','12,7','Vida Tres','7','1998-04-13');
+        addRow('08243302-K','','294927','Habitat','12,84','Banmedica','6,9','1998-04-14');
+        addRow('08244396-2','Casa Matriz','319854','Habitat','12,84','Vida Tres','7','1998-04-15');
+        addRow('08398900-7','Sucursal 2','410292','Habitat','12,84','Banmedica','6,9','2000-02-29');
+        addRow('08425562-2','','793023','Bansander','12,7','Vida Tres','7','2000-03-01');
+        addRow('08438411-9','Casa Matriz','264145','Bansander','12,7','Banmedica','6,9','2000-03-02');
+        addRow('08462857-5','Casa Matriz','574250','Bansander','12,7','Vida Tres','7','2000-03-03');
+        addRow('08591563-5','Casa Matriz','290708','Bansander','12,7','Vida Tres','7','2000-03-04');
+        addRow('09063227-0','Casa Matriz','414763','Bansander','12,7','Vida Tres','7','2000-03-05');
+        addRow('09067386-9','Sucursal 1','678677','Bansander','12,7','Banmedica','6,9','2000-03-06');
+        addRow('09157826-K','Casa Matriz','411366','Habitat','12,84','Vida Tres','7','2001-12-14');
+        addRow('09161825-2','Casa Matriz','643774','Bansander','12,7','Consalud','7,2','2001-12-15');
+        addRow('09451206-1','Sucursal 2','698799','Habitat','12,84','Banmedica','6,9','2001-12-16');
+        addRow('09688915-2','','262641','Habitat','12,84','Banmedica','6,9','2001-12-17');
+        addRow('09695377-7','Casa Matriz','351265','Bansander','12,7','Banmedica','6,9','2001-12-18');
+        addRow('09890277-0','Sucursal 1','334126','Bansander','12,7','Vida Tres','7','2001-12-19');
+        addRow('09991198-5','Sucursal 1','654445','Habitat','12,84','Vida Tres','7','2001-12-20');
+        addRow('10024356-K','Casa Matriz','448031','Habitat','12,84','Banmedica','6,9','1999-01-01');
+        addRow('10327486-0','Sucursal 2','341820','Habitat','12,84','Vida Tres','7','1999-01-02');
+        addRow('10372319-9','Sucursal 1','324358','Bansander','12,7','Consalud','7,2','1999-01-03');
+        addRow('11199878-4','Casa Matriz','607530','Habitat','12,84','Consalud','7,2','1999-01-04');
+        addRow('11239396-3','Sucursal 1','653833','Bansander','12,7','Consalud','7,2','1999-01-05');
+        addRow('11554331-9','','291360','Habitat','12,84','Banmedica','6,9','2002-05-11');
+        addRow('12499164-1','Sucursal 2','282819','Bansander','12,7','Consalud','7,2','2002-05-12');
+        addRow('12674955-8','Casa Matriz','319601','Habitat','12,84','Consalud','7,2','2002-05-13');
+        addRow('12964831-2','Casa Matriz','647962','Habitat','12,84','Banmedica','6,9','2002-05-14');
+        addRow('12967692-9','Casa Matriz','733229','Bansander','12,7','Banmedica','6,9','2002-05-15');
+        addRow('13198860-3','Sucursal 2','462348','Bansander','12,7','Consalud','7,2','2002-05-16');
+        addRow('13259292-7','','674433','Bansander','12,7','Banmedica','6,9','2002-05-17');
+        addRow('13755266-K','Sucursal 1','474469','Habitat','12,84','Vida Tres','7','1996-12-12');
+        addRow('13795888-K','Casa Matriz','455421','Habitat','12,84','Vida Tres','7','1996-12-13');
+
+
+        runObserver();
+        setCurrencyListeners();
+        calculateRows();
+      });
+
+      function setEstado(S, PA, DA, PI, DI, SL){
+        var sueldo = localStringToNumber(S.value);
+        var porcAFP = parseFloat(PA.value.replace(",",".")) / 100;
+        var porcIsapre = parseFloat(PI.value.replace(",",".")) / 100;
+        var descAFP = (sueldo * porcAFP);
+        var descIsapre = (sueldo * porcIsapre);
+        var sueldoLiquido = sueldo - descAFP - descIsapre;
+
+        DA.value = formatoMoneda(descAFP);
+        DI.value = formatoMoneda(descIsapre);
+        SL.value = formatoMoneda(sueldoLiquido);
+        return sueldoLiquido;
+      }
+
+      function calculateRows(){
+        var sueldosBase = [];
+        var sueldosLiquidos = [];
+        var descuentosAFP = [];
+        var descuentosISAPRE = [];
+        var totalDescuentosIsapre = 0;
+        var porcentajesISAPRE = [];
+        var porcRecurrente = 0;
+        var sinUbi = 0;
+        var n = $('#tableBody tr').length;
+        for (let index = 1; index < n+1; index++) {
+          setEstado(document.getElementById("S"+index),document.getElementById("PA"+index),document.getElementById("DA"+index),document.getElementById("PI"+index),document.getElementById("DI"+index),document.getElementById("SL"+index));
+          var sueldo = localStringToNumber(document.getElementById("S"+index).value);
+          var descuentoAFP = localStringToNumber(document.getElementById("DA"+index).value);
+          totalDescuentosIsapre += localStringToNumber(document.getElementById("DI"+index).value);
+          var sueldoLiquido = localStringToNumber(document.getElementById("SL"+index).value);
+          var porcIsapre = document.getElementById("PI"+index).value;
+          
+          var exist = false;
+          for (var pIsapre of porcentajesISAPRE){
+            if(pIsapre[0] == porcIsapre){
+              exist = true;
+              pIsapre[1] = parseInt(pIsapre[1])+1; 
+            }
+          }
+
+          if (!exist){
+            porcentajesISAPRE.push([porcIsapre,1])
+          }
+
+          sueldosBase.push(sueldo);
+          descuentosAFP.push(descuentoAFP);
+          sueldosLiquidos.push(sueldoLiquido);
+          if (document.getElementById("U"+index).value == ""){
+            sinUbi++;
+          }
+
+
+        }
+
+        var countPIsapre = 0;
+          for (var PIsapre of porcentajesISAPRE){
+            if (countPIsapre < PIsapre[1]){
+              porcRecurrente = PIsapre[0];
+              countPIsapre = PIsapre[1];
+            }
+          }
+        
+        console.log(porcentajesISAPRE);
+        document.getElementById("SBA").value = formatoMoneda(Math.max.apply(null,sueldosBase));
+        document.getElementById("DAB").value = formatoMoneda(Math.min.apply(null,descuentosAFP));
+        document.getElementById("SLB").value = formatoMoneda(Math.min.apply(null,sueldosLiquidos));
+        document.getElementById("PIR").value = porcRecurrente;
+        document.getElementById("PSU").value = sinUbi;
+        document.getElementById("PDI").value = formatoMoneda(totalDescuentosIsapre/n);
+        
+      }
+
+      function addRow(rut,ubi,sueldoBase,afp,porcAfp,isapre,porcIsapre,fecha){
+        var rowCount = $('#tableBody tr').length;
+        var n = rowCount + 1;
+        $('#tableBody tr:last').after('<tr><td><input type="text" class="form-control" id="R'+n+'" value="'+rut+'"></td><td><input type="text" class="form-control" id="U'+n+'" value="'+ubi+'"></td><td><input type="currency" class="form-control" id="S'+n+'" value="'+sueldoBase+'"></td><td><input type="text" class="form-control" id="A'+n+'" value="'+afp+'"></td><td><input type="text" class="form-control" id="PA'+n+'" value="'+porcAfp+'"></td><td><input type="currency" class="form-control" id="DA'+n+'" value="0"></td><td><input type="text" class="form-control" id="I'+n+'" value="'+isapre+'"></td><td><input type="text" class="form-control" id="PI'+n+'" value="'+porcIsapre+'"></td><td><input type="currency" class="form-control" id="DI'+n+'" value="0"></td><td><input type="date" class="form-control" id="F'+n+'" value="'+fecha+'"></td><td><input type="currency" class="form-control" id="SL'+n+'" value="0"></td></tr>');
+      }
+      
+  </script>
+</head>
+<body>
+    <div class="p-3">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Sumativa 3</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ejercicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <h6 class="dropdown-header">Parte 1</h6>
+                      <a class="dropdown-item" href="ej1.html">Ejercicio 1 - Deuda</a>
+                      <a class="dropdown-item" href="ej2.html">Ejercicio 2 - Total Compra</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 2</h6>
+                      <a class="dropdown-item" href="ej3.html">Ejercicio 3 - Sueldo</a>
+                      <a class="dropdown-item" href="ej4.html">Ejercicio 4 - Acciones</a>
+                      <a class="dropdown-item" href="ej5.html">Ejercicio 5 - Gastos/Ventas</a>
+                      <a class="dropdown-item" href="ej6.html">Ejercicio 6 - Ingresos/Comisión</a>
+                      <a class="dropdown-item" href="ej7.html">Ejercicio 7 - Sueldo/Hora</a>
+                      <a class="dropdown-item" href="ej8.html">Ejercicio 8 - Vuelos</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 3</h6>
+                      <a class="dropdown-item" href="ej9.html">Ejercicio 9 - Sueldo Empleado</a>
+                      <a class="dropdown-item" href="ej10.html">Ejercicio 10 - Notas</a>
+                      <a class="dropdown-item" href="ej11.html">Ejercicio 11 - Banco</a>
+                      <a class="dropdown-item" href="ej12.html">Ejercicio 12 - Sueldo/Hijos</a>
+                      <a class="dropdown-item active" href="ej13.html">Ejercicio 13 - Isapre/AFP</a>
+                  </div>
+                    </li>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <table class="table" id="tabla">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 8%;">RUT</th>
+                    <th scope="col">Ubicacion</th>
+                    <th scope="col">Sueldo Base</th>
+                    <th scope="col">AFP</th>
+                    <th scope="col" style="width: 5%;">% AFP</th>
+                    <th scope="col">Descuento AFP</th>
+                    <th scope="col">Isapre</th>
+                    <th scope="col" style="width: 5%;">% Isapre</th>
+                    <th scope="col">Descuento Isapre</th>
+                    <th scope="col" style="width: 10%;">Fecha Ingreso</th>
+                    <th scope="col">Sueldo Liquido</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <tr>
+                    <td><input type="text" class="form-control" id="R1" value="05252757-5"></td>
+                    <td><input type="text" class="form-control" id="U1" value="Sucursal 2"></td>
+                    <td><input type="currency" class="form-control" id="S1" value="693520"></td>
+                    <td><input type="text" class="form-control" id="A1" value="Bansander"></td>
+                    <td><input type="text" class="form-control" id="PA1" value="12,7"></td>
+                    <td><input type="currency" class="form-control" id="DA1" value="0"></td>
+                    <td><input type="text" class="form-control" id="I1" value="Banmedica"></td>
+                    <td><input type="text" class="form-control" id="PI1" value="6,9"></td>
+                    <td><input type="currency" class="form-control" id="DI1" value="0"></td>
+                    <td><input type="date" class="form-control" id="F1" value="1996-12-14"></td>
+                    <td><input type="currency" class="form-control" id="SL1" value="0"></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Agregar fila</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Promedio descuento ISAPRE</td>
+                    <td><input type="text" class="form-control" readonly id="PDI" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Sueldo base mas alto</td>
+                    <td><input type="text" class="form-control" readonly id="SBA" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Descuento AFP mas bajo</td>
+                    <td><input type="text" class="form-control" readonly id="DAB" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">% descuento ISAPRE mas recurrente</td>
+                    <td><input type="text" class="form-control" readonly id="PIR" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Personas sin informacion de ubicacion</td>
+                    <td><input type="text" class="form-control" readonly id="PSU" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Sueldo Liquido mas bajo</td>
+                    <td><input type="text" class="form-control" readonly id="SLB" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+            </table>            
+          </div>
+        </div>
+    </div>
+</body>
+</html>

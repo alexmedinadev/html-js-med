@@ -1,0 +1,268 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumativa 3 | </title>
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95e1a31bea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script>
+      $(document).ready(function(){
+        $("#addButton").click(function(){
+          addRow("","","",0,"",0);
+        });
+
+        addRow("Mario Pontes","Walserweg 21","ladeco","1183481","Brasil","2");
+        addRow("Aria Cruz","","lan","1028964","Brasil","5");
+        addRow("Jean Fresnière","Brovallavägen 231","lan","1127148","Canadá","4");
+        addRow("Jaime Yorres","","lan","936254","EE. UU.","2");
+        addRow("John Steel","Kaloadagatan 13","lan","874447","EE. UU.","3");
+        addRow("Fran Wilson","Viale Dante, 75","lan","1032398","EE. UU.","6");
+        addRow("Jonas Bergulfsen","Tiergartenstraße 5","lan","1727233","Noruega","2");
+        addRow("Lino Rodriguez ","67, rue des Cinquante Otages","ladeco","1214384","Portugal","5");
+        addRow("Helen Bennett","","klm","719931","Reino Unido","1");
+        addRow("Victoria Ashworth","Balmaceda 23 E","ibm","360000","Reino Unido","4");
+        addRow("Christina Berglund","Lizt 6677","ladeco","492700","Suecia","2");
+        addRow("Michael Holz","","klm","1664066","Suiza","5");
+        addRow("Yang Wang","23 Tsawassen Blvd.","american","967157","Suiza","3");
+        addRow("Yvonne Moncada","471 Serangoon Loop, Suite #402","klm","1221899","Argentina","6");
+        addRow("Janete Limeira","Berguvsvägen  8","lan","1632483","Brasil","2");
+        addRow("Bernardo Batista","22, rue H. Voiron","klm","1442983","Brasil","5");
+        addRow("André Fonseca","","lan","619950","Brasil","1");
+        addRow("Pedro Afonso","San Pablo 1674","lan","760000","Brasil","4");
+        addRow("José Pedro Freyre","Providencia 1030","american","200000","España","2");
+        addRow("Paolo Accorti","","ladeco","1121674","Italia","5");
+        addRow("Francisco Chang","Berkeley Gardens 12  Brewery ","lan","1152577","México","3");
+        addRow("Guillermo Fernández","170 Prince Edward Parade Hunter's Hill","klm","1348232","México","6");
+        addRow("Isabel de Castro","Via dei Gelsomini, 153","klm","1411399","Portugal","2");
+        addRow("Ann Devon","","ladeco","594500","Reino Unido","5");
+
+        runObserver();
+        setCurrencyListeners();
+      });
+
+      function calculateRows(){
+        var n = $('#tableBody tr').length;
+        var totalHijos = 0;
+        var totalSueldos = 0;
+        var sueldoMax;
+        var sueldoMin;
+        var sueldos = [];
+        var hijosList = [];
+        var promedioSueldo;
+        var promedioHijos;
+        var sinDireccion = 0;
+        var recuHijos;
+
+        for (let index = 1; index < n+1; index++) {
+          var monto = localStringToNumber(document.getElementById("S"+index).value);
+          var hijos = parseInt(document.getElementById("H"+index).value);
+          totalSueldos += monto;
+          totalHijos += hijos;
+          sueldos.push(monto);
+          if (document.getElementById("D"+index).value == ""){
+            sinDireccion++;
+          }
+          var exist = false;
+          for (var hijo of hijosList){
+            if (hijo[0] == hijos){
+              exist = true;
+              hijo[1] = hijo[1]+1;
+            }
+          }
+          if (!exist){
+            hijosList.push([hijos,1])
+          }
+          
+        }
+
+        var countHijos = 0;
+        for (var hijo of hijosList){
+          if (countHijos < hijo[1]){
+            recuHijos = hijo[0];
+            countHijos = hijo[1];
+          }
+        }
+        
+        sueldoMax = Math.max.apply(null, sueldos);
+        sueldoMin = Math.min.apply(null, sueldos);
+        promedioSueldo = (totalSueldos / n);
+        promedioHijos = (totalHijos / n);
+
+        document.getElementById("TS").value = formatoMoneda(totalSueldos);
+        document.getElementById("NE").value = n;
+        document.getElementById("SA").value = formatoMoneda(sueldoMax);
+        document.getElementById("SB").value = formatoMoneda(sueldoMin);
+        document.getElementById("PS").value = formatoMoneda(promedioSueldo);
+        document.getElementById("PH").value = promedioHijos;
+        document.getElementById("SD").value = sinDireccion;
+        document.getElementById("HM").value = recuHijos;
+      }
+
+      function addRow(nombre,dir,empresa,sueldo,pais,hijos){
+        var rowCount = $('#tableBody tr').length;
+        var n = rowCount + 1;
+        $('#tableBody tr:last').after('<tr><td><input type="text" class="form-control" id="N'+n+'" value="'+nombre+'"></td><td><input type="text" class="form-control" id="D'+n+'" value="'+dir+'"></td><td><input type="text" class="form-control" id="E'+n+'" value="'+empresa+'"></td><td><input type="currency" class="form-control" id="S'+n+'" value="'+sueldo+'"></td><td><input type="text" class="form-control" id="P'+n+'" value="'+pais+'"></td><td><input type="text" class="form-control" id="H'+n+'" value="'+hijos+'"></td></tr>');
+        calculateRows();
+      }
+      
+  </script>
+</head>
+<body>
+    <div class="p-3">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Sumativa 3</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ejercicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <h6 class="dropdown-header">Parte 1</h6>
+                      <a class="dropdown-item" href="ej1.html">Ejercicio 1 - Deuda</a>
+                      <a class="dropdown-item" href="ej2.html">Ejercicio 2 - Total Compra</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 2</h6>
+                      <a class="dropdown-item" href="ej3.html">Ejercicio 3 - Sueldo</a>
+                      <a class="dropdown-item" href="ej4.html">Ejercicio 4 - Acciones</a>
+                      <a class="dropdown-item" href="ej5.html">Ejercicio 5 - Gastos/Ventas</a>
+                      <a class="dropdown-item" href="ej6.html">Ejercicio 6 - Ingresos/Comisión</a>
+                      <a class="dropdown-item" href="ej7.html">Ejercicio 7 - Sueldo/Hora</a>
+                      <a class="dropdown-item" href="ej8.html">Ejercicio 8 - Vuelos</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 3</h6>
+                      <a class="dropdown-item" href="ej9.html">Ejercicio 9 - Sueldo Empleado</a>
+                      <a class="dropdown-item" href="ej10.html">Ejercicio 10 - Notas</a>
+                      <a class="dropdown-item" href="ej11.html">Ejercicio 11 - Banco</a>
+                      <a class="dropdown-item active" href="ej12.html">Ejercicio 12 - Sueldo/Hijos</a>
+                      <a class="dropdown-item" href="ej13.html">Ejercicio 13 - Isapre/AFP</a>
+                  </div>
+                    </li>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <table class="table" id="tabla">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Sueldo ($)</th>
+                    <th scope="col">Pais</th>
+                    <th scope="col">N° Hijos</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <tr>
+                    <td><input type="text" class="form-control" id="N1" value="Lúcia Carvalho"></td>
+                    <td><input type="text" class="form-control" id="D1" value="Bat. B3, rue des Alpes"></td>
+                    <td><input type="text" class="form-control" id="E1" value="lan"></td>
+                    <td><input type="currency" class="form-control" id="S1" value="1474566"></td>
+                    <td><input type="text" class="form-control" id="P1" value="Brasil"></td>
+                    <td><input type="text" class="form-control" id="H1" value="1"></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Agregar fila</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Total de Sueldos</td>
+                    <td><input type="text" class="form-control" readonly id="TS" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Nº de empleados</td>
+                    <td><input type="text" class="form-control" readonly id="NE" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Sueldo más alto</td>
+                    <td><input type="text" class="form-control" readonly id="SA" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Sueldo más bajo</td>
+                    <td><input type="text" class="form-control" readonly id="SB" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Promedio de sueldos</td>
+                    <td><input type="text" class="form-control" readonly id="PS" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">Promedio de Nº de hijos</td>
+                    <td><input type="text" class="form-control" readonly id="PH" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">¿Cuántos empleados NO tienen dirección?</td>
+                    <td><input type="text" class="form-control" readonly id="SD" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right; vertical-align: middle;">¿Cuál es el número de hijos más habitual?</td>
+                    <td><input type="text" class="form-control" readonly id="HM" value="0"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+            </table>            
+          </div>
+        </div>
+    </div>
+</body>
+</html>

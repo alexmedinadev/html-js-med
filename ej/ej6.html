@@ -1,0 +1,143 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumativa 3 | </title>
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95e1a31bea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script>
+      $(document).ready(function(){
+        $("#addButton").click(function(){
+          var n = $('#tableBody tr').length;
+          addRow(n+1,0,0,);
+        });
+
+        addRow("Limpieza",20,300);
+        addRow("Bebidas",60,600);
+        addRow("Libros",70,800);
+        addRow("Informatica",10,400);
+        addRow("Alimentacion",15,800);
+        addRow("Muebles",55,600);
+        
+        runObserver();
+        setCurrencyListeners();
+      });
+
+      function setEstado(uv, p, i, c){
+        var unidadesVendidas = parseFloat(uv.value);
+        var precio = localStringToNumber(p.value);
+        var ingresoVentas = precio*unidadesVendidas;
+        var comision = ingresoVentas*0.15;
+
+        i.value = formatoMoneda(ingresoVentas);
+        c.value = formatoMoneda(comision);
+      }
+
+      function calculateRows(){
+        var n = $('#tableBody tr').length;
+        for (let index = 1; index < n+1; index++) {
+          setEstado(document.getElementById("UV"+index),document.getElementById("P"+index),document.getElementById("I"+index),document.getElementById("C"+index));
+        }
+      }
+
+      function addRow(name,cant,price){
+        var rowCount = $('#tableBody tr').length;
+        var n = rowCount + 1;
+        $('#tableBody tr:last').after('<tr><td><input type="text" class="form-control" id="A'+n+'" value="'+name+'"></td><td><input type="text" class="form-control" id="UV'+n+'" value="'+cant+'"></td><td><input type="currency" class="form-control" id="P'+n+'" value="'+price+'"></td><td><input type="text" class="form-control" readonly id="I'+n+'" value="0"></td><td><input type="text" class="form-control" readonly id="C'+n+'" value="0"></td></tr>');
+        calculateRows();
+      }
+      
+  </script>
+</head>
+<body>
+    <div class="p-3">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Sumativa 3</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ejercicios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <h6 class="dropdown-header">Parte 1</h6>
+                      <a class="dropdown-item" href="ej1.html">Ejercicio 1 - Deuda</a>
+                      <a class="dropdown-item" href="ej2.html">Ejercicio 2 - Total Compra</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 2</h6>
+                      <a class="dropdown-item" href="ej3.html">Ejercicio 3 - Sueldo</a>
+                      <a class="dropdown-item" href="ej4.html">Ejercicio 4 - Acciones</a>
+                      <a class="dropdown-item" href="ej5.html">Ejercicio 5 - Gastos/Ventas</a>
+                      <a class="dropdown-item active" href="ej6.html">Ejercicio 6 - Ingresos/Comisión</a>
+                      <a class="dropdown-item" href="ej7.html">Ejercicio 7 - Sueldo/Hora</a>
+                      <a class="dropdown-item" href="ej8.html">Ejercicio 8 - Vuelos</a>
+                      <div class="dropdown-divider"></div>
+                      <h6 class="dropdown-header">Parte 3</h6>
+                      <a class="dropdown-item" href="ej9.html">Ejercicio 9 - Sueldo Empleado</a>
+                      <a class="dropdown-item" href="ej10.html">Ejercicio 10 - Notas</a>
+                      <a class="dropdown-item" href="ej11.html">Ejercicio 11 - Banco</a>
+                      <a class="dropdown-item" href="ej12.html">Ejercicio 12 - Sueldo/Hijos</a>
+                      <a class="dropdown-item" href="ej13.html">Ejercicio 13 - Isapre/AFP</a>
+                  </div>
+                    </li>
+                </div>
+            </nav>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body">
+            <table class="table" id="tabla">
+                <thead>
+                  <tr>
+                    <th scope="col">Articulo</th>
+                    <th scope="col">Unidades Vendidas</th>
+                    <th scope="col">Precio Unidad</th>
+                    <th scope="col">Ingresos</th>
+                    <th scope="col">Comision</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <tr>
+                    <td><input type="text" class="form-control" id="A1" value="Calzado"></td>
+                    <td><input type="text" class="form-control" id="UV1" value="30"></td>
+                    <td><input type="currency" class="form-control" id="P1" value="500"></td>
+                    <td><input type="text" class="form-control" readonly id="I1" value="0"></td>
+                    <td><input type="text" class="form-control" readonly id="C1" value="0"></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right;">
+                      <button class="btn btn-success" id="addButton"><i class="fa fa-plus"></i> Agregar fila</button>
+                    </td>
+                  </tr>
+                </tfoot>
+            </table>            
+          </div>
+        </div>
+    </div>
+</body>
+</html>
