@@ -101,3 +101,7 @@ function onBlur(e){
     }
   
 }
+
+function copyleft(){
+    console.log("JS/HTML Level 2");
+}
